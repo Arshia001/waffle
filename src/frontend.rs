@@ -1195,6 +1195,73 @@ impl<'a, 'b> FunctionBodyBuilder<'a, 'b> {
             | wasmparser::Operator::TableSet { .. }
             | wasmparser::Operator::TableGrow { .. }
             | wasmparser::Operator::TableSize { .. }
+            | wasmparser::Operator::MemoryAtomicNotify { .. }
+            | wasmparser::Operator::MemoryAtomicWait32 { .. }
+            | wasmparser::Operator::MemoryAtomicWait64 { .. }
+            | wasmparser::Operator::AtomicFence
+            | wasmparser::Operator::I32AtomicLoad { .. }
+            | wasmparser::Operator::I64AtomicLoad { .. }
+            | wasmparser::Operator::I32AtomicLoad8U { .. }
+            | wasmparser::Operator::I32AtomicLoad16U { .. }
+            | wasmparser::Operator::I64AtomicLoad8U { .. }
+            | wasmparser::Operator::I64AtomicLoad16U { .. }
+            | wasmparser::Operator::I64AtomicLoad32U { .. }
+            | wasmparser::Operator::I32AtomicStore { .. }
+            | wasmparser::Operator::I64AtomicStore { .. }
+            | wasmparser::Operator::I32AtomicStore8 { .. }
+            | wasmparser::Operator::I32AtomicStore16 { .. }
+            | wasmparser::Operator::I64AtomicStore8 { .. }
+            | wasmparser::Operator::I64AtomicStore16 { .. }
+            | wasmparser::Operator::I64AtomicStore32 { .. }
+            | wasmparser::Operator::I32AtomicRmwAdd { .. }
+            | wasmparser::Operator::I64AtomicRmwAdd { .. }
+            | wasmparser::Operator::I32AtomicRmw8AddU { .. }
+            | wasmparser::Operator::I32AtomicRmw16AddU { .. }
+            | wasmparser::Operator::I64AtomicRmw8AddU { .. }
+            | wasmparser::Operator::I64AtomicRmw16AddU { .. }
+            | wasmparser::Operator::I64AtomicRmw32AddU { .. }
+            | wasmparser::Operator::I32AtomicRmwSub { .. }
+            | wasmparser::Operator::I64AtomicRmwSub { .. }
+            | wasmparser::Operator::I32AtomicRmw8SubU { .. }
+            | wasmparser::Operator::I32AtomicRmw16SubU { .. }
+            | wasmparser::Operator::I64AtomicRmw8SubU { .. }
+            | wasmparser::Operator::I64AtomicRmw16SubU { .. }
+            | wasmparser::Operator::I64AtomicRmw32SubU { .. }
+            | wasmparser::Operator::I32AtomicRmwAnd { .. }
+            | wasmparser::Operator::I64AtomicRmwAnd { .. }
+            | wasmparser::Operator::I32AtomicRmw8AndU { .. }
+            | wasmparser::Operator::I32AtomicRmw16AndU { .. }
+            | wasmparser::Operator::I64AtomicRmw8AndU { .. }
+            | wasmparser::Operator::I64AtomicRmw16AndU { .. }
+            | wasmparser::Operator::I64AtomicRmw32AndU { .. }
+            | wasmparser::Operator::I32AtomicRmwOr { .. }
+            | wasmparser::Operator::I64AtomicRmwOr { .. }
+            | wasmparser::Operator::I32AtomicRmw8OrU { .. }
+            | wasmparser::Operator::I32AtomicRmw16OrU { .. }
+            | wasmparser::Operator::I64AtomicRmw8OrU { .. }
+            | wasmparser::Operator::I64AtomicRmw16OrU { .. }
+            | wasmparser::Operator::I64AtomicRmw32OrU { .. }
+            | wasmparser::Operator::I32AtomicRmwXor { .. }
+            | wasmparser::Operator::I64AtomicRmwXor { .. }
+            | wasmparser::Operator::I32AtomicRmw8XorU { .. }
+            | wasmparser::Operator::I32AtomicRmw16XorU { .. }
+            | wasmparser::Operator::I64AtomicRmw8XorU { .. }
+            | wasmparser::Operator::I64AtomicRmw16XorU { .. }
+            | wasmparser::Operator::I64AtomicRmw32XorU { .. }
+            | wasmparser::Operator::I32AtomicRmwXchg { .. }
+            | wasmparser::Operator::I64AtomicRmwXchg { .. }
+            | wasmparser::Operator::I32AtomicRmw8XchgU { .. }
+            | wasmparser::Operator::I32AtomicRmw16XchgU { .. }
+            | wasmparser::Operator::I64AtomicRmw8XchgU { .. }
+            | wasmparser::Operator::I64AtomicRmw16XchgU { .. }
+            | wasmparser::Operator::I64AtomicRmw32XchgU { .. }
+            | wasmparser::Operator::I32AtomicRmwCmpxchg { .. }
+            | wasmparser::Operator::I64AtomicRmwCmpxchg { .. }
+            | wasmparser::Operator::I32AtomicRmw8CmpxchgU { .. }
+            | wasmparser::Operator::I32AtomicRmw16CmpxchgU { .. }
+            | wasmparser::Operator::I64AtomicRmw8CmpxchgU { .. }
+            | wasmparser::Operator::I64AtomicRmw16CmpxchgU { .. }
+            | wasmparser::Operator::I64AtomicRmw32CmpxchgU { .. }
             | wasmparser::Operator::V128Load { .. }
             | wasmparser::Operator::V128Load8x8S { .. }
             | wasmparser::Operator::V128Load8x8U { .. }

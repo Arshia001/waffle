@@ -570,6 +570,216 @@ impl<'a> WasmFuncBackend<'a> {
                 Some(wasm_encoder::Instruction::MemoryFill(mem.index() as u32))
             }
 
+            Operator::MemoryAtomicNotify { memory } => Some(
+                wasm_encoder::Instruction::MemoryAtomicNotify(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::MemoryAtomicWait32 { memory } => Some(
+                wasm_encoder::Instruction::MemoryAtomicWait32(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::MemoryAtomicWait64 { memory } => Some(
+                wasm_encoder::Instruction::MemoryAtomicWait64(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::AtomicFence => Some(wasm_encoder::Instruction::AtomicFence),
+            Operator::I32AtomicLoad { memory } => Some(wasm_encoder::Instruction::I32AtomicLoad(
+                wasm_encoder::MemArg::from(*memory),
+            )),
+            Operator::I64AtomicLoad { memory } => Some(wasm_encoder::Instruction::I64AtomicLoad(
+                wasm_encoder::MemArg::from(*memory),
+            )),
+            Operator::I32AtomicLoad8U { memory } => Some(
+                wasm_encoder::Instruction::I32AtomicLoad8U(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I32AtomicLoad16U { memory } => Some(
+                wasm_encoder::Instruction::I32AtomicLoad16U(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicLoad8U { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicLoad8U(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicLoad16U { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicLoad16U(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicLoad32U { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicLoad32U(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I32AtomicStore { memory } => Some(wasm_encoder::Instruction::I32AtomicStore(
+                wasm_encoder::MemArg::from(*memory),
+            )),
+            Operator::I64AtomicStore { memory } => Some(wasm_encoder::Instruction::I64AtomicStore(
+                wasm_encoder::MemArg::from(*memory),
+            )),
+            Operator::I32AtomicStore8 { memory } => Some(
+                wasm_encoder::Instruction::I32AtomicStore8(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I32AtomicStore16 { memory } => Some(
+                wasm_encoder::Instruction::I32AtomicStore16(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicStore8 { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicStore8(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicStore16 { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicStore16(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicStore32 { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicStore32(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I32AtomicRmwAdd { memory } => Some(
+                wasm_encoder::Instruction::I32AtomicRmwAdd(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicRmwAdd { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicRmwAdd(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I32AtomicRmw8AddU { memory } => Some(
+                wasm_encoder::Instruction::I32AtomicRmw8AddU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I32AtomicRmw16AddU { memory } => Some(
+                wasm_encoder::Instruction::I32AtomicRmw16AddU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicRmw8AddU { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicRmw8AddU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicRmw16AddU { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicRmw16AddU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicRmw32AddU { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicRmw32AddU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I32AtomicRmwSub { memory } => Some(
+                wasm_encoder::Instruction::I32AtomicRmwSub(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicRmwSub { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicRmwSub(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I32AtomicRmw8SubU { memory } => Some(
+                wasm_encoder::Instruction::I32AtomicRmw8SubU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I32AtomicRmw16SubU { memory } => Some(
+                wasm_encoder::Instruction::I32AtomicRmw16SubU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicRmw8SubU { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicRmw8SubU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicRmw16SubU { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicRmw16SubU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicRmw32SubU { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicRmw32SubU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I32AtomicRmwAnd { memory } => Some(
+                wasm_encoder::Instruction::I32AtomicRmwAnd(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicRmwAnd { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicRmwAnd(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I32AtomicRmw8AndU { memory } => Some(
+                wasm_encoder::Instruction::I32AtomicRmw8AndU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I32AtomicRmw16AndU { memory } => Some(
+                wasm_encoder::Instruction::I32AtomicRmw16AndU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicRmw8AndU { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicRmw8AndU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicRmw16AndU { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicRmw16AndU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicRmw32AndU { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicRmw32AndU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I32AtomicRmwOr { memory } => Some(wasm_encoder::Instruction::I32AtomicRmwOr(
+                wasm_encoder::MemArg::from(*memory),
+            )),
+            Operator::I64AtomicRmwOr { memory } => Some(wasm_encoder::Instruction::I64AtomicRmwOr(
+                wasm_encoder::MemArg::from(*memory),
+            )),
+            Operator::I32AtomicRmw8OrU { memory } => Some(
+                wasm_encoder::Instruction::I32AtomicRmw8OrU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I32AtomicRmw16OrU { memory } => Some(
+                wasm_encoder::Instruction::I32AtomicRmw16OrU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicRmw8OrU { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicRmw8OrU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicRmw16OrU { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicRmw16OrU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicRmw32OrU { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicRmw32OrU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I32AtomicRmwXor { memory } => Some(
+                wasm_encoder::Instruction::I32AtomicRmwXor(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicRmwXor { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicRmwXor(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I32AtomicRmw8XorU { memory } => Some(
+                wasm_encoder::Instruction::I32AtomicRmw8XorU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I32AtomicRmw16XorU { memory } => Some(
+                wasm_encoder::Instruction::I32AtomicRmw16XorU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicRmw8XorU { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicRmw8XorU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicRmw16XorU { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicRmw16XorU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicRmw32XorU { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicRmw32XorU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I32AtomicRmwXchg { memory } => Some(
+                wasm_encoder::Instruction::I32AtomicRmwXchg(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicRmwXchg { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicRmwXchg(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I32AtomicRmw8XchgU { memory } => Some(
+                wasm_encoder::Instruction::I32AtomicRmw8XchgU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I32AtomicRmw16XchgU { memory } => Some(
+                wasm_encoder::Instruction::I32AtomicRmw16XchgU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicRmw8XchgU { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicRmw8XchgU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicRmw16XchgU { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicRmw16XchgU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicRmw32XchgU { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicRmw32XchgU(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I32AtomicRmwCmpxchg { memory } => Some(
+                wasm_encoder::Instruction::I32AtomicRmwCmpxchg(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I64AtomicRmwCmpxchg { memory } => Some(
+                wasm_encoder::Instruction::I64AtomicRmwCmpxchg(wasm_encoder::MemArg::from(*memory)),
+            ),
+            Operator::I32AtomicRmw8CmpxchgU { memory } => {
+                Some(wasm_encoder::Instruction::I32AtomicRmw8CmpxchgU(
+                    wasm_encoder::MemArg::from(*memory),
+                ))
+            }
+            Operator::I32AtomicRmw16CmpxchgU { memory } => {
+                Some(wasm_encoder::Instruction::I32AtomicRmw16CmpxchgU(
+                    wasm_encoder::MemArg::from(*memory),
+                ))
+            }
+            Operator::I64AtomicRmw8CmpxchgU { memory } => {
+                Some(wasm_encoder::Instruction::I64AtomicRmw8CmpxchgU(
+                    wasm_encoder::MemArg::from(*memory),
+                ))
+            }
+            Operator::I64AtomicRmw16CmpxchgU { memory } => {
+                Some(wasm_encoder::Instruction::I64AtomicRmw16CmpxchgU(
+                    wasm_encoder::MemArg::from(*memory),
+                ))
+            }
+            Operator::I64AtomicRmw32CmpxchgU { memory } => {
+                Some(wasm_encoder::Instruction::I64AtomicRmw32CmpxchgU(
+                    wasm_encoder::MemArg::from(*memory),
+                ))
+            }
+
             Operator::V128Load { memory } => Some(wasm_encoder::Instruction::V128Load(
                 wasm_encoder::MemArg::from(*memory),
             )),

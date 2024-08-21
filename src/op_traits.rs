@@ -227,6 +227,96 @@ pub fn op_inputs(
         Operator::MemoryCopy { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I32, Type::I32])),
         Operator::MemoryFill { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I32, Type::I32])),
 
+        Operator::MemoryAtomicNotify { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I32])),
+        Operator::MemoryAtomicWait32 { .. } => {
+            Ok(Cow::Borrowed(&[Type::I32, Type::I32, Type::I64]))
+        }
+        Operator::MemoryAtomicWait64 { .. } => {
+            Ok(Cow::Borrowed(&[Type::I32, Type::I64, Type::I64]))
+        }
+
+        Operator::AtomicFence => Ok(Cow::Borrowed(&[])),
+
+        Operator::I32AtomicLoad { .. }
+        | Operator::I64AtomicLoad { .. }
+        | Operator::I32AtomicLoad8U { .. }
+        | Operator::I32AtomicLoad16U { .. }
+        | Operator::I64AtomicLoad8U { .. }
+        | Operator::I64AtomicLoad16U { .. }
+        | Operator::I64AtomicLoad32U { .. } => Ok(Cow::Borrowed(&[Type::I32])),
+
+        Operator::I32AtomicStore { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I32])),
+        Operator::I64AtomicStore { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I64])),
+        Operator::I32AtomicStore8 { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I32])),
+        Operator::I32AtomicStore16 { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I32])),
+        Operator::I64AtomicStore8 { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I64])),
+        Operator::I64AtomicStore16 { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I64])),
+        Operator::I64AtomicStore32 { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I64])),
+
+        Operator::I32AtomicRmwAdd { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I32])),
+        Operator::I64AtomicRmwAdd { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I64])),
+        Operator::I32AtomicRmw8AddU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I32])),
+        Operator::I32AtomicRmw16AddU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I32])),
+        Operator::I64AtomicRmw8AddU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I64])),
+        Operator::I64AtomicRmw16AddU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I64])),
+        Operator::I64AtomicRmw32AddU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I64])),
+        Operator::I32AtomicRmwSub { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I32])),
+        Operator::I64AtomicRmwSub { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I64])),
+        Operator::I32AtomicRmw8SubU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I32])),
+        Operator::I32AtomicRmw16SubU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I32])),
+        Operator::I64AtomicRmw8SubU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I64])),
+        Operator::I64AtomicRmw16SubU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I64])),
+        Operator::I64AtomicRmw32SubU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I64])),
+        Operator::I32AtomicRmwAnd { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I32])),
+        Operator::I64AtomicRmwAnd { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I64])),
+        Operator::I32AtomicRmw8AndU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I32])),
+        Operator::I32AtomicRmw16AndU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I32])),
+        Operator::I64AtomicRmw8AndU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I64])),
+        Operator::I64AtomicRmw16AndU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I64])),
+        Operator::I64AtomicRmw32AndU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I64])),
+        Operator::I32AtomicRmwOr { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I32])),
+        Operator::I64AtomicRmwOr { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I64])),
+        Operator::I32AtomicRmw8OrU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I32])),
+        Operator::I32AtomicRmw16OrU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I32])),
+        Operator::I64AtomicRmw8OrU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I64])),
+        Operator::I64AtomicRmw16OrU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I64])),
+        Operator::I64AtomicRmw32OrU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I64])),
+        Operator::I32AtomicRmwXor { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I32])),
+        Operator::I64AtomicRmwXor { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I64])),
+        Operator::I32AtomicRmw8XorU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I32])),
+        Operator::I32AtomicRmw16XorU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I32])),
+        Operator::I64AtomicRmw8XorU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I64])),
+        Operator::I64AtomicRmw16XorU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I64])),
+        Operator::I64AtomicRmw32XorU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I64])),
+        Operator::I32AtomicRmwXchg { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I32])),
+        Operator::I64AtomicRmwXchg { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I64])),
+        Operator::I32AtomicRmw8XchgU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I32])),
+        Operator::I32AtomicRmw16XchgU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I32])),
+        Operator::I64AtomicRmw8XchgU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I64])),
+        Operator::I64AtomicRmw16XchgU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I64])),
+        Operator::I64AtomicRmw32XchgU { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I64])),
+        Operator::I32AtomicRmwCmpxchg { .. } => {
+            Ok(Cow::Borrowed(&[Type::I32, Type::I32, Type::I32]))
+        }
+        Operator::I64AtomicRmwCmpxchg { .. } => {
+            Ok(Cow::Borrowed(&[Type::I32, Type::I64, Type::I64]))
+        }
+        Operator::I32AtomicRmw8CmpxchgU { .. } => {
+            Ok(Cow::Borrowed(&[Type::I32, Type::I32, Type::I32]))
+        }
+        Operator::I32AtomicRmw16CmpxchgU { .. } => {
+            Ok(Cow::Borrowed(&[Type::I32, Type::I32, Type::I32]))
+        }
+        Operator::I64AtomicRmw8CmpxchgU { .. } => {
+            Ok(Cow::Borrowed(&[Type::I32, Type::I64, Type::I64]))
+        }
+        Operator::I64AtomicRmw16CmpxchgU { .. } => {
+            Ok(Cow::Borrowed(&[Type::I32, Type::I64, Type::I64]))
+        }
+        Operator::I64AtomicRmw32CmpxchgU { .. } => {
+            Ok(Cow::Borrowed(&[Type::I32, Type::I64, Type::I64]))
+        }
+
         Operator::V128Load { .. } => Ok(Cow::Borrowed(&[Type::I32])),
         Operator::V128Load8x8S { .. } => Ok(Cow::Borrowed(&[Type::I32])),
         Operator::V128Load8x8U { .. } => Ok(Cow::Borrowed(&[Type::I32])),
@@ -697,6 +787,78 @@ pub fn op_outputs(
         Operator::MemoryGrow { .. } => Ok(Cow::Borrowed(&[Type::I32])),
         Operator::MemoryCopy { .. } => Ok(Cow::Borrowed(&[])),
         Operator::MemoryFill { .. } => Ok(Cow::Borrowed(&[])),
+
+        Operator::MemoryAtomicNotify { .. } => Ok(Cow::Borrowed(&[Type::I32])),
+        Operator::MemoryAtomicWait32 { .. } => Ok(Cow::Borrowed(&[Type::I32])),
+        Operator::MemoryAtomicWait64 { .. } => Ok(Cow::Borrowed(&[Type::I32])),
+
+        Operator::AtomicFence => Ok(Cow::Borrowed(&[])),
+
+        Operator::I32AtomicLoad { .. } => Ok(Cow::Borrowed(&[Type::I32])),
+        Operator::I64AtomicLoad { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I32AtomicLoad8U { .. } => Ok(Cow::Borrowed(&[Type::I32])),
+        Operator::I32AtomicLoad16U { .. } => Ok(Cow::Borrowed(&[Type::I32])),
+        Operator::I64AtomicLoad8U { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I64AtomicLoad16U { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I64AtomicLoad32U { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+
+        Operator::I32AtomicStore { .. } => Ok(Cow::Borrowed(&[])),
+        Operator::I64AtomicStore { .. } => Ok(Cow::Borrowed(&[])),
+        Operator::I32AtomicStore8 { .. } => Ok(Cow::Borrowed(&[])),
+        Operator::I32AtomicStore16 { .. } => Ok(Cow::Borrowed(&[])),
+        Operator::I64AtomicStore8 { .. } => Ok(Cow::Borrowed(&[])),
+        Operator::I64AtomicStore16 { .. } => Ok(Cow::Borrowed(&[])),
+        Operator::I64AtomicStore32 { .. } => Ok(Cow::Borrowed(&[])),
+
+        Operator::I32AtomicRmwAdd { .. } => Ok(Cow::Borrowed(&[Type::I32])),
+        Operator::I64AtomicRmwAdd { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I32AtomicRmw8AddU { .. } => Ok(Cow::Borrowed(&[Type::I32])),
+        Operator::I32AtomicRmw16AddU { .. } => Ok(Cow::Borrowed(&[Type::I32])),
+        Operator::I64AtomicRmw8AddU { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I64AtomicRmw16AddU { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I64AtomicRmw32AddU { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I32AtomicRmwSub { .. } => Ok(Cow::Borrowed(&[Type::I32])),
+        Operator::I64AtomicRmwSub { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I32AtomicRmw8SubU { .. } => Ok(Cow::Borrowed(&[Type::I32])),
+        Operator::I32AtomicRmw16SubU { .. } => Ok(Cow::Borrowed(&[Type::I32])),
+        Operator::I64AtomicRmw8SubU { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I64AtomicRmw16SubU { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I64AtomicRmw32SubU { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I32AtomicRmwAnd { .. } => Ok(Cow::Borrowed(&[Type::I32])),
+        Operator::I64AtomicRmwAnd { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I32AtomicRmw8AndU { .. } => Ok(Cow::Borrowed(&[Type::I32])),
+        Operator::I32AtomicRmw16AndU { .. } => Ok(Cow::Borrowed(&[Type::I32])),
+        Operator::I64AtomicRmw8AndU { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I64AtomicRmw16AndU { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I64AtomicRmw32AndU { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I32AtomicRmwOr { .. } => Ok(Cow::Borrowed(&[Type::I32])),
+        Operator::I64AtomicRmwOr { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I32AtomicRmw8OrU { .. } => Ok(Cow::Borrowed(&[Type::I32])),
+        Operator::I32AtomicRmw16OrU { .. } => Ok(Cow::Borrowed(&[Type::I32])),
+        Operator::I64AtomicRmw8OrU { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I64AtomicRmw16OrU { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I64AtomicRmw32OrU { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I32AtomicRmwXor { .. } => Ok(Cow::Borrowed(&[Type::I32])),
+        Operator::I64AtomicRmwXor { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I32AtomicRmw8XorU { .. } => Ok(Cow::Borrowed(&[Type::I32])),
+        Operator::I32AtomicRmw16XorU { .. } => Ok(Cow::Borrowed(&[Type::I32])),
+        Operator::I64AtomicRmw8XorU { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I64AtomicRmw16XorU { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I64AtomicRmw32XorU { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I32AtomicRmwXchg { .. } => Ok(Cow::Borrowed(&[Type::I32])),
+        Operator::I64AtomicRmwXchg { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I32AtomicRmw8XchgU { .. } => Ok(Cow::Borrowed(&[Type::I32])),
+        Operator::I32AtomicRmw16XchgU { .. } => Ok(Cow::Borrowed(&[Type::I32])),
+        Operator::I64AtomicRmw8XchgU { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I64AtomicRmw16XchgU { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I64AtomicRmw32XchgU { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I32AtomicRmwCmpxchg { .. } => Ok(Cow::Borrowed(&[Type::I32])),
+        Operator::I64AtomicRmwCmpxchg { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I32AtomicRmw8CmpxchgU { .. } => Ok(Cow::Borrowed(&[Type::I32])),
+        Operator::I32AtomicRmw16CmpxchgU { .. } => Ok(Cow::Borrowed(&[Type::I32])),
+        Operator::I64AtomicRmw8CmpxchgU { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I64AtomicRmw16CmpxchgU { .. } => Ok(Cow::Borrowed(&[Type::I64])),
+        Operator::I64AtomicRmw32CmpxchgU { .. } => Ok(Cow::Borrowed(&[Type::I64])),
 
         Operator::V128Load { .. } => Ok(Cow::Borrowed(&[Type::V128])),
         Operator::V128Load8x8S { .. } => Ok(Cow::Borrowed(&[Type::I32])),
@@ -1187,6 +1349,78 @@ impl Operator {
             Operator::MemoryGrow { .. } => &[WriteMem, Trap],
             Operator::MemoryCopy { .. } => &[Trap, ReadMem, WriteMem],
             Operator::MemoryFill { .. } => &[Trap, WriteMem],
+
+            Operator::MemoryAtomicNotify { .. } => &[],
+            Operator::MemoryAtomicWait32 { .. } => &[Trap],
+            Operator::MemoryAtomicWait64 { .. } => &[Trap],
+
+            Operator::AtomicFence => &[],
+
+            Operator::I32AtomicLoad { .. }
+            | Operator::I64AtomicLoad { .. }
+            | Operator::I32AtomicLoad8U { .. }
+            | Operator::I32AtomicLoad16U { .. }
+            | Operator::I64AtomicLoad8U { .. }
+            | Operator::I64AtomicLoad16U { .. }
+            | Operator::I64AtomicLoad32U { .. } => &[Trap, ReadMem],
+
+            Operator::I32AtomicStore { .. }
+            | Operator::I64AtomicStore { .. }
+            | Operator::I32AtomicStore8 { .. }
+            | Operator::I32AtomicStore16 { .. }
+            | Operator::I64AtomicStore8 { .. }
+            | Operator::I64AtomicStore16 { .. }
+            | Operator::I64AtomicStore32 { .. } => &[Trap],
+
+            Operator::I32AtomicRmwAdd { .. }
+            | Operator::I64AtomicRmwAdd { .. }
+            | Operator::I32AtomicRmw8AddU { .. }
+            | Operator::I32AtomicRmw16AddU { .. }
+            | Operator::I64AtomicRmw8AddU { .. }
+            | Operator::I64AtomicRmw16AddU { .. }
+            | Operator::I64AtomicRmw32AddU { .. }
+            | Operator::I32AtomicRmwSub { .. }
+            | Operator::I64AtomicRmwSub { .. }
+            | Operator::I32AtomicRmw8SubU { .. }
+            | Operator::I32AtomicRmw16SubU { .. }
+            | Operator::I64AtomicRmw8SubU { .. }
+            | Operator::I64AtomicRmw16SubU { .. }
+            | Operator::I64AtomicRmw32SubU { .. }
+            | Operator::I32AtomicRmwAnd { .. }
+            | Operator::I64AtomicRmwAnd { .. }
+            | Operator::I32AtomicRmw8AndU { .. }
+            | Operator::I32AtomicRmw16AndU { .. }
+            | Operator::I64AtomicRmw8AndU { .. }
+            | Operator::I64AtomicRmw16AndU { .. }
+            | Operator::I64AtomicRmw32AndU { .. }
+            | Operator::I32AtomicRmwOr { .. }
+            | Operator::I64AtomicRmwOr { .. }
+            | Operator::I32AtomicRmw8OrU { .. }
+            | Operator::I32AtomicRmw16OrU { .. }
+            | Operator::I64AtomicRmw8OrU { .. }
+            | Operator::I64AtomicRmw16OrU { .. }
+            | Operator::I64AtomicRmw32OrU { .. }
+            | Operator::I32AtomicRmwXor { .. }
+            | Operator::I64AtomicRmwXor { .. }
+            | Operator::I32AtomicRmw8XorU { .. }
+            | Operator::I32AtomicRmw16XorU { .. }
+            | Operator::I64AtomicRmw8XorU { .. }
+            | Operator::I64AtomicRmw16XorU { .. }
+            | Operator::I64AtomicRmw32XorU { .. }
+            | Operator::I32AtomicRmwXchg { .. }
+            | Operator::I64AtomicRmwXchg { .. }
+            | Operator::I32AtomicRmw8XchgU { .. }
+            | Operator::I32AtomicRmw16XchgU { .. }
+            | Operator::I64AtomicRmw8XchgU { .. }
+            | Operator::I64AtomicRmw16XchgU { .. }
+            | Operator::I64AtomicRmw32XchgU { .. }
+            | Operator::I32AtomicRmwCmpxchg { .. }
+            | Operator::I64AtomicRmwCmpxchg { .. }
+            | Operator::I32AtomicRmw8CmpxchgU { .. }
+            | Operator::I32AtomicRmw16CmpxchgU { .. }
+            | Operator::I64AtomicRmw8CmpxchgU { .. }
+            | Operator::I64AtomicRmw16CmpxchgU { .. }
+            | Operator::I64AtomicRmw32CmpxchgU { .. } => &[ReadMem, WriteMem, Trap],
 
             Operator::V128Load { .. } => &[Trap, ReadMem],
             Operator::V128Load8x8S { .. } => &[Trap, ReadMem],
@@ -1805,6 +2039,94 @@ impl std::fmt::Display for Operator {
                 write!(f, "memory_copy<{}, {}>", dst_mem, src_mem)?
             }
             Operator::MemoryFill { mem } => write!(f, "memory_fill<{}>", mem)?,
+
+            Operator::MemoryAtomicNotify { memory } => write!(f, "memoryatomicnotify<{}>", memory)?,
+            Operator::MemoryAtomicWait32 { memory } => write!(f, "memoryatomicwait32<{}>", memory)?,
+            Operator::MemoryAtomicWait64 { memory } => write!(f, "memoryatomicwait64<{}>", memory)?,
+            Operator::AtomicFence => write!(f, "atomicfence")?,
+            Operator::I32AtomicLoad { memory } => write!(f, "i32atomicload<{}>", memory)?,
+            Operator::I64AtomicLoad { memory } => write!(f, "i64atomicload<{}>", memory)?,
+            Operator::I32AtomicLoad8U { memory } => write!(f, "i32atomicload8u<{}>", memory)?,
+            Operator::I32AtomicLoad16U { memory } => write!(f, "i32atomicload16u<{}>", memory)?,
+            Operator::I64AtomicLoad8U { memory } => write!(f, "i64atomicload8u<{}>", memory)?,
+            Operator::I64AtomicLoad16U { memory } => write!(f, "i64atomicload16u<{}>", memory)?,
+            Operator::I64AtomicLoad32U { memory } => write!(f, "i64atomicload32u<{}>", memory)?,
+            Operator::I32AtomicStore { memory } => write!(f, "i32atomicstore<{}>", memory)?,
+            Operator::I64AtomicStore { memory } => write!(f, "i64atomicstore<{}>", memory)?,
+            Operator::I32AtomicStore8 { memory } => write!(f, "i32atomicstore8<{}>", memory)?,
+            Operator::I32AtomicStore16 { memory } => write!(f, "i32atomicstore16<{}>", memory)?,
+            Operator::I64AtomicStore8 { memory } => write!(f, "i64atomicstore8<{}>", memory)?,
+            Operator::I64AtomicStore16 { memory } => write!(f, "i64atomicstore16<{}>", memory)?,
+            Operator::I64AtomicStore32 { memory } => write!(f, "i64atomicstore32<{}>", memory)?,
+            Operator::I32AtomicRmwAdd { memory } => write!(f, "i32atomicrmwadd<{}>", memory)?,
+            Operator::I64AtomicRmwAdd { memory } => write!(f, "i64atomicrmwadd<{}>", memory)?,
+            Operator::I32AtomicRmw8AddU { memory } => write!(f, "i32atomicrmw8addu<{}>", memory)?,
+            Operator::I32AtomicRmw16AddU { memory } => write!(f, "i32atomicrmw16addu<{}>", memory)?,
+            Operator::I64AtomicRmw8AddU { memory } => write!(f, "i64atomicrmw8addu<{}>", memory)?,
+            Operator::I64AtomicRmw16AddU { memory } => write!(f, "i64atomicrmw16addu<{}>", memory)?,
+            Operator::I64AtomicRmw32AddU { memory } => write!(f, "i64atomicrmw32addu<{}>", memory)?,
+            Operator::I32AtomicRmwSub { memory } => write!(f, "i32atomicrmwsub<{}>", memory)?,
+            Operator::I64AtomicRmwSub { memory } => write!(f, "i64atomicrmwsub<{}>", memory)?,
+            Operator::I32AtomicRmw8SubU { memory } => write!(f, "i32atomicrmw8subu<{}>", memory)?,
+            Operator::I32AtomicRmw16SubU { memory } => write!(f, "i32atomicrmw16subu<{}>", memory)?,
+            Operator::I64AtomicRmw8SubU { memory } => write!(f, "i64atomicrmw8subu<{}>", memory)?,
+            Operator::I64AtomicRmw16SubU { memory } => write!(f, "i64atomicrmw16subu<{}>", memory)?,
+            Operator::I64AtomicRmw32SubU { memory } => write!(f, "i64atomicrmw32subu<{}>", memory)?,
+            Operator::I32AtomicRmwAnd { memory } => write!(f, "i32atomicrmwand<{}>", memory)?,
+            Operator::I64AtomicRmwAnd { memory } => write!(f, "i64atomicrmwand<{}>", memory)?,
+            Operator::I32AtomicRmw8AndU { memory } => write!(f, "i32atomicrmw8andu<{}>", memory)?,
+            Operator::I32AtomicRmw16AndU { memory } => write!(f, "i32atomicrmw16andu<{}>", memory)?,
+            Operator::I64AtomicRmw8AndU { memory } => write!(f, "i64atomicrmw8andu<{}>", memory)?,
+            Operator::I64AtomicRmw16AndU { memory } => write!(f, "i64atomicrmw16andu<{}>", memory)?,
+            Operator::I64AtomicRmw32AndU { memory } => write!(f, "i64atomicrmw32andu<{}>", memory)?,
+            Operator::I32AtomicRmwOr { memory } => write!(f, "i32atomicrmwor<{}>", memory)?,
+            Operator::I64AtomicRmwOr { memory } => write!(f, "i64atomicrmwor<{}>", memory)?,
+            Operator::I32AtomicRmw8OrU { memory } => write!(f, "i32atomicrmw8oru<{}>", memory)?,
+            Operator::I32AtomicRmw16OrU { memory } => write!(f, "i32atomicrmw16oru<{}>", memory)?,
+            Operator::I64AtomicRmw8OrU { memory } => write!(f, "i64atomicrmw8oru<{}>", memory)?,
+            Operator::I64AtomicRmw16OrU { memory } => write!(f, "i64atomicrmw16oru<{}>", memory)?,
+            Operator::I64AtomicRmw32OrU { memory } => write!(f, "i64atomicrmw32oru<{}>", memory)?,
+            Operator::I32AtomicRmwXor { memory } => write!(f, "i32atomicrmwxor<{}>", memory)?,
+            Operator::I64AtomicRmwXor { memory } => write!(f, "i64atomicrmwxor<{}>", memory)?,
+            Operator::I32AtomicRmw8XorU { memory } => write!(f, "i32atomicrmw8xoru<{}>", memory)?,
+            Operator::I32AtomicRmw16XorU { memory } => write!(f, "i32atomicrmw16xoru<{}>", memory)?,
+            Operator::I64AtomicRmw8XorU { memory } => write!(f, "i64atomicrmw8xoru<{}>", memory)?,
+            Operator::I64AtomicRmw16XorU { memory } => write!(f, "i64atomicrmw16xoru<{}>", memory)?,
+            Operator::I64AtomicRmw32XorU { memory } => write!(f, "i64atomicrmw32xoru<{}>", memory)?,
+            Operator::I32AtomicRmwXchg { memory } => write!(f, "i32atomicrmwxchg<{}>", memory)?,
+            Operator::I64AtomicRmwXchg { memory } => write!(f, "i64atomicrmwxchg<{}>", memory)?,
+            Operator::I32AtomicRmw8XchgU { memory } => write!(f, "i32atomicrmw8xchgu<{}>", memory)?,
+            Operator::I32AtomicRmw16XchgU { memory } => {
+                write!(f, "i32atomicrmw16xchgu<{}>", memory)?
+            }
+            Operator::I64AtomicRmw8XchgU { memory } => write!(f, "i64atomicrmw8xchgu<{}>", memory)?,
+            Operator::I64AtomicRmw16XchgU { memory } => {
+                write!(f, "i64atomicrmw16xchgu<{}>", memory)?
+            }
+            Operator::I64AtomicRmw32XchgU { memory } => {
+                write!(f, "i64atomicrmw32xchgu<{}>", memory)?
+            }
+            Operator::I32AtomicRmwCmpxchg { memory } => {
+                write!(f, "i32atomicrmwcmpxchg<{}>", memory)?
+            }
+            Operator::I64AtomicRmwCmpxchg { memory } => {
+                write!(f, "i64atomicrmwcmpxchg<{}>", memory)?
+            }
+            Operator::I32AtomicRmw8CmpxchgU { memory } => {
+                write!(f, "i32atomicrmw8cmpxchgu<{}>", memory)?
+            }
+            Operator::I32AtomicRmw16CmpxchgU { memory } => {
+                write!(f, "i32atomicrmw16cmpxchgu<{}>", memory)?
+            }
+            Operator::I64AtomicRmw8CmpxchgU { memory } => {
+                write!(f, "i64atomicrmw8cmpxchgu<{}>", memory)?
+            }
+            Operator::I64AtomicRmw16CmpxchgU { memory } => {
+                write!(f, "i64atomicrmw16cmpxchgu<{}>", memory)?
+            }
+            Operator::I64AtomicRmw32CmpxchgU { memory } => {
+                write!(f, "i64atomicrmw32cmpxchgu<{}>", memory)?
+            }
 
             Operator::V128Load { memory } => write!(f, "v128load<{}>", memory)?,
             Operator::V128Load8x8S { memory } => write!(f, "v128load8x8s<{}>", memory)?,
