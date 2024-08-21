@@ -239,7 +239,22 @@ fn handle_payload<'a>(
             for segment in reader {
                 let segment = segment?;
                 match &segment.kind {
-                    DataKind::Passive => {}
+                    DataKind::Passive => {
+                        // We need all the passive data to come first because otherwise, we'd have to
+                        // rewrite the indices in the code.
+                        if module
+                            .memories
+                            .entries()
+                            .flat_map(|(_, m)| m.segments.iter())
+                            .next()
+                            .is_some()
+                        {
+                            bail!("Passive data segments that come after active data segments are not supported");
+                        }
+
+                        let data = segment.data.to_vec();
+                        module.passive_data.push(PassiveDataSegment { data });
+                    }
                     DataKind::Active {
                         memory_index,
                         offset_expr,

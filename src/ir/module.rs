@@ -49,6 +49,9 @@ pub struct Module<'a> {
     pub exports: Vec<Export>,
     /// Memories/heapds that this module contains.
     pub memories: EntityVec<Memory, MemoryData>,
+    /// Passive data segments contained within the module. Active
+    /// segments are recorded in the `memories` field.
+    pub passive_data: Vec<PassiveDataSegment>,
     /// The "start function" invoked at instantiation, if any.
     pub start_func: Option<Func>,
     /// Debug-info associated with function bodies: interning pools
@@ -92,6 +95,11 @@ pub struct MemorySegment {
     /// The offset of this data.
     pub offset: usize,
     /// The data, overlaid on previously-existing data at this offset.
+    pub data: Vec<u8>,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
+pub struct PassiveDataSegment {
     pub data: Vec<u8>,
 }
 
@@ -230,6 +238,7 @@ impl<'a> Module<'a> {
             imports: vec![],
             exports: vec![],
             memories: EntityVec::default(),
+            passive_data: vec![],
             start_func: None,
             debug: Debug::default(),
             debug_map: DebugMap::default(),
@@ -269,6 +278,7 @@ impl<'a> Module<'a> {
             imports: self.imports,
             exports: self.exports,
             memories: self.memories,
+            passive_data: self.passive_data,
             start_func: self.start_func,
             debug: self.debug,
             debug_map: self.debug_map,
@@ -347,6 +357,7 @@ impl<'a> Module<'a> {
             imports: vec![],
             exports: vec![],
             memories: EntityVec::default(),
+            passive_data: vec![],
             start_func: None,
             debug: Debug::default(),
             debug_map: DebugMap::default(),

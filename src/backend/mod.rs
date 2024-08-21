@@ -1415,6 +1415,9 @@ pub fn compile(module: &Module<'_>) -> anyhow::Result<Vec<u8>> {
     into_mod.section(&code);
 
     let mut data = wasm_encoder::DataSection::new();
+    for data_segment in &module.passive_data {
+        data.passive(data_segment.data.iter().copied());
+    }
     for (mem, mem_data) in module.memories.entries() {
         for segment in &mem_data.segments {
             data.active(

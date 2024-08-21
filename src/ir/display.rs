@@ -229,6 +229,14 @@ impl<'a> Display for ModuleDisplay<'a> {
                 )?;
             }
         }
+        for (idx, data) in self.module.passive_data.iter().enumerate() {
+            writeln!(
+                f,
+                "  passive data segment {}: # {} bytes",
+                idx,
+                data.data.len()
+            )?;
+        }
         for import in &self.module.imports {
             writeln!(
                 f,
