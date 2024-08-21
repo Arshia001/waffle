@@ -569,6 +569,9 @@ impl<'a> WasmFuncBackend<'a> {
             Operator::MemoryFill { mem } => {
                 Some(wasm_encoder::Instruction::MemoryFill(mem.index() as u32))
             }
+            Operator::DataDrop { data_index } => {
+                Some(wasm_encoder::Instruction::DataDrop(*data_index))
+            }
 
             Operator::MemoryAtomicNotify { memory } => Some(
                 wasm_encoder::Instruction::MemoryAtomicNotify(wasm_encoder::MemArg::from(*memory)),

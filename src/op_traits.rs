@@ -226,6 +226,7 @@ pub fn op_inputs(
         Operator::MemoryGrow { .. } => Ok(Cow::Borrowed(&[Type::I32])),
         Operator::MemoryCopy { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I32, Type::I32])),
         Operator::MemoryFill { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I32, Type::I32])),
+        Operator::DataDrop { .. } => Ok(Cow::Borrowed(&[])),
 
         Operator::MemoryAtomicNotify { .. } => Ok(Cow::Borrowed(&[Type::I32, Type::I32])),
         Operator::MemoryAtomicWait32 { .. } => {
@@ -787,6 +788,7 @@ pub fn op_outputs(
         Operator::MemoryGrow { .. } => Ok(Cow::Borrowed(&[Type::I32])),
         Operator::MemoryCopy { .. } => Ok(Cow::Borrowed(&[])),
         Operator::MemoryFill { .. } => Ok(Cow::Borrowed(&[])),
+        Operator::DataDrop { .. } => Ok(Cow::Borrowed(&[])),
 
         Operator::MemoryAtomicNotify { .. } => Ok(Cow::Borrowed(&[Type::I32])),
         Operator::MemoryAtomicWait32 { .. } => Ok(Cow::Borrowed(&[Type::I32])),
@@ -1349,6 +1351,7 @@ impl Operator {
             Operator::MemoryGrow { .. } => &[WriteMem, Trap],
             Operator::MemoryCopy { .. } => &[Trap, ReadMem, WriteMem],
             Operator::MemoryFill { .. } => &[Trap, WriteMem],
+            Operator::DataDrop { .. } => &[],
 
             Operator::MemoryAtomicNotify { .. } => &[],
             Operator::MemoryAtomicWait32 { .. } => &[Trap],
@@ -2039,6 +2042,7 @@ impl std::fmt::Display for Operator {
                 write!(f, "memory_copy<{}, {}>", dst_mem, src_mem)?
             }
             Operator::MemoryFill { mem } => write!(f, "memory_fill<{}>", mem)?,
+            Operator::DataDrop { data_index } => write!(f, "data_drop<{}>", data_index)?,
 
             Operator::MemoryAtomicNotify { memory } => write!(f, "memoryatomicnotify<{}>", memory)?,
             Operator::MemoryAtomicWait32 { memory } => write!(f, "memoryatomicwait32<{}>", memory)?,

@@ -320,6 +320,9 @@ pub enum Operator {
     MemoryFill {
         mem: Memory,
     },
+    DataDrop {
+        data_index: u32,
+    },
 
     MemoryAtomicNotify {
         memory: MemoryArg,
@@ -1146,6 +1149,7 @@ impl<'a, 'b> std::convert::TryFrom<&'b wasmparser::Operator<'a>> for Operator {
             &wasmparser::Operator::MemoryFill { mem } => Ok(Operator::MemoryFill {
                 mem: Memory::from(mem),
             }),
+            &wasmparser::Operator::DataDrop { data_index } => Ok(Operator::DataDrop { data_index }),
 
             &wasmparser::Operator::MemoryAtomicNotify { memarg } => {
                 Ok(Operator::MemoryAtomicNotify {

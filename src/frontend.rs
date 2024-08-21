@@ -1195,6 +1195,9 @@ impl<'a, 'b> FunctionBodyBuilder<'a, 'b> {
             | wasmparser::Operator::TableSet { .. }
             | wasmparser::Operator::TableGrow { .. }
             | wasmparser::Operator::TableSize { .. }
+            | wasmparser::Operator::DataDrop { .. }
+            | wasmparser::Operator::MemoryCopy { .. }
+            | wasmparser::Operator::MemoryFill { .. }
             | wasmparser::Operator::MemoryAtomicNotify { .. }
             | wasmparser::Operator::MemoryAtomicWait32 { .. }
             | wasmparser::Operator::MemoryAtomicWait64 { .. }
