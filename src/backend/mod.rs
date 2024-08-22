@@ -1384,6 +1384,17 @@ pub fn compile(module: &Module<'_>) -> anyhow::Result<Vec<u8>> {
     }
     into_mod.section(&elem);
 
+    let data_count = wasm_encoder::DataCountSection {
+        count: module.passive_data.len() as u32
+            + module
+                .memories
+                .entries()
+                .map(|(_, mem)| mem.segments.len() as u32)
+                .sum::<u32>(),
+    };
+
+    into_mod.section(&data_count);
+
     let mut code = wasm_encoder::CodeSection::new();
 
     let bodies = module
