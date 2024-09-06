@@ -147,6 +147,7 @@ fn handle_payload<'a>(
                             initial_pages: mem.initial as usize,
                             maximum_pages: mem.maximum.map(|max| max as usize),
                             segments: vec![],
+                            shared: mem.shared,
                         });
                         ImportKind::Memory(mem)
                     }
@@ -232,6 +233,7 @@ fn handle_payload<'a>(
                     initial_pages: memory.initial as usize,
                     maximum_pages: memory.maximum.map(|max| max as usize),
                     segments: vec![],
+                    shared: memory.shared,
                 });
             }
         }

@@ -87,6 +87,7 @@ pub struct MemoryData {
     pub maximum_pages: Option<usize>,
     /// Initialization data (initial image) for this memory.
     pub segments: Vec<MemorySegment>,
+    pub shared: bool,
 }
 
 /// A segment of data in a memory's initial state.

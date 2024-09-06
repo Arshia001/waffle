@@ -1249,7 +1249,7 @@ pub fn compile(module: &Module<'_>) -> anyhow::Result<Vec<u8>> {
                 let mem = &module.memories[mem];
                 wasm_encoder::EntityType::Memory(wasm_encoder::MemoryType {
                     memory64: false,
-                    shared: false,
+                    shared: mem.shared,
                     minimum: mem.initial_pages as u64,
                     maximum: mem.maximum_pages.map(|val| val as u64),
                     page_size_log2: None,
