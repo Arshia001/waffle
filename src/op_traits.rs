@@ -1373,7 +1373,7 @@ impl Operator {
             | Operator::I32AtomicStore16 { .. }
             | Operator::I64AtomicStore8 { .. }
             | Operator::I64AtomicStore16 { .. }
-            | Operator::I64AtomicStore32 { .. } => &[Trap],
+            | Operator::I64AtomicStore32 { .. } => &[Trap, WriteMem],
 
             Operator::I32AtomicRmwAdd { .. }
             | Operator::I64AtomicRmwAdd { .. }
